@@ -1,7 +1,8 @@
 #include <iostream>
+using std::cin, std::cout, std::endl;
 
-// Recursive factorial program
 int factorial(int n)
+// This function returns the nth factorial number using recursion.
 {
     if (n == 1)
         return 1;
@@ -10,8 +11,8 @@ int factorial(int n)
 
 int main(){
     int n;
-    std::cout << "Enter a number for factorial: " << std::endl;
-    std::cin >> n;
-    std::cout << "Factorial of " << n << " is " << factorial(n) << std::endl;
+    cout << "Enter a number for factorial: " << endl;
+    cin >> n;
+    cout << "Factorial of " << n << " is " << factorial(n) << endl;
     return 0;
 }
