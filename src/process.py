@@ -1,27 +1,29 @@
 import os
+import pathlib
 import subprocess
-from pathlib import Path
-from threading import Thread
 from loguru import logger
+
+__all__ = ("Process",)
 
 
 class Process:
     """
-    A class that handles the execution of a cpp program.
+    This class runs and manages a process of cpp program, when it is being executed using this class.
     """
 
-    def __init__(self, compiler: str, cpp_compiler_flags: str, file_format: str):
+    def __init__(self, compiler: str, compiler_flags: str, format_of_the_file: str):
         """
+        This method initializes a :class:`Process` class instance.
 
-        Args:
-            compiler (str): The compiler to use.
-            cpp_compiler_flags (str): The flags to use when compiling the cpp file.
-            file_format (str): The format of the file to run.
+        Parameters:
+            compiler (str): The name of the compiler to use.
+            compiler_flags (str): The flags to use when compiling a cpp file.
+            format_of_the_file (str): This parameter takes a list of file formats that the compiler will run.
         """
         self.logger = logger
         self.compiler = compiler
-        self.cpp_compiler_flags = cpp_compiler_flags
-        self.format = file_format
+        self.compiler_flags = compiler_flags
+        self.format_of_the_file = format_of_the_file
 
     def check_if_compiler_exists(self) -> bool:
         """
@@ -43,51 +45,64 @@ class Process:
             )
             return False
 
-    def check_file_format(self, file: str) -> bool:
+    def check_file_format(self, path_to_the_file: pathlib.Path) -> bool:
         """
         This method checks if the file is in the correct format.
 
-        Args:
-            file (str): The format of the file to check.
+        Parameters:
+            path_to_the_file (str): The format of the file to check.
 
         Returns:
             bool: True if file is in the correct format, False otherwise.
         """
-        filename = file.split("/")[len(file.split("/")) - 1]
-        if Path(file).is_file() and Path(file).suffix == self.format:
+        filename = path_to_the_file.name.split("/")[
+            len(path_to_the_file.name.split("/")) - 1
+        ]
+        #  This statement splits the file name from the file path and checks if the suffix is the same as the format
+        #  that was passed in the parameter.
+        if (
+            path_to_the_file.is_file()
+            and path_to_the_file.suffix.lower() == self.format_of_the_file
+        ):
             return True
         else:
             self.logger.error(
-                f"{filename} is not in the correct format!. .cpp files are required."
+                f"{filename} is not in the correct format!. {self.format_of_the_file} files are required."
             )
             return False
 
-    def execute_cpp_file(self, cpp_source_file: str):
+    def execute_cpp_file(self, cpp_source_file: pathlib.Path):
         """
         This is an internal method that executes the cpp file. You can use this method directly, but it's not \
         recommended. This method is used by the run_program method which threads the execution of the cpp file.
 
-        Args:
+        Parameters:
             cpp_source_file (str): The cpp source file to run.
         """
-        filename = cpp_source_file.split("/")[len(cpp_source_file.split("/")) - 1]
+        filename = cpp_source_file.name.split("/")[
+            len(cpp_source_file.name.split("/")) - 1
+        ]
 
         if self.check_if_compiler_exists() and self.check_file_format(cpp_source_file):
             self.logger.info(
-                f"Compiling {filename} with flags {self.cpp_compiler_flags}"
+                f"Compiling '{filename}' using '{self.compiler}' with flags '{self.compiler_flags}'"
             )
-            cpp_command = f"{self.compiler} {cpp_source_file} {self.cpp_compiler_flags} && ./a.out && rm a.out"
+            cpp_command = f"{self.compiler} {cpp_source_file} {self.compiler_flags}"
 
-            os.system(cpp_command)
+            process = subprocess.run(
+                cpp_command, shell=True, text=True, capture_output=True
+            )
+            if process.returncode == 0:
+                self.logger.info(
+                    f"{filename} compiled successfully!"
+                )  # If the file compiled successfully, run the executable.
+                os.system("./a.out && rm a.out")
+            else:
+                self.logger.error(
+                    f"{filename} failed to compile! Exception: {process.stderr}"
+                )
         else:
+            self.logger.error(
+                f"{filename} failed to compile! Either the compiler or the file format is incorrect."
+            )
             return
-
-    def run_program(self, cpp_source_file: str):
-        """
-        This method call the execute_cpp_file method in a thread. This method is used to run the cpp file.
-
-        Args:
-            cpp_source_file (str): The cpp source file to run.
-        """
-        target = Thread(target=self.execute_cpp_file, args=(cpp_source_file,))
-        target.start()
