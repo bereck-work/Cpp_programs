@@ -1,8 +1,10 @@
-// required imports
 #include <iostream> 
-#include <cstdlib> 
-#include <ctime> 
-#include <conio.h> // for windows
+#include <cstdlib> // for rand() "random no generator"
+#include <ctime> // for time(NULL) "seed for random numer genrator" 
+#include <conio.h> // for _kbhit() "determining if a key is pressed, only works on windows operating system.
+
+using cout, endl;
+
 
 
 enum Ball_Direction{STOP, LEFT, UPLEFT, DOWNLEFT, RIGHT, UPRIGHT, DOWNRIGHT};
@@ -154,44 +156,44 @@ class Ping_Pong{
 			system("cls"); // first clearing the screen to remove prev timestep
 			
 			// printing above wall
-			for (int i=0; i< width+2; i++) std::cout << "\xB2";
-			std::cout << std::endl;
+			for (int i=0; i< width+2; i++) cout << "\xB2";
+			cout << endl;
 			
 			// printing side walls, ball and blades
 			for(int i=0; i<height; i++){ // to traverse along height
 				for(int j=0; j<width; j++){ // to traverse along width
 					
-					if (j==0) std::cout << "\xB2"; // left wall element
+					if (j==0) cout << "\xB2"; // left wall element
 					
-					if(ball->x == j && ball->y == i) std::cout << "O"; // printing ball at its
+					if(ball->x == j && ball->y == i) cout << "O"; // printing ball at its
 																// position
 					// printing player_1 blade (length=4)
-					else if(player_1->x == j && player_1->y == i) std::cout << "\xDB";
-					else if(player_1->x == j && player_1->y + 1 == i) std::cout << "\xDB";
-					else if(player_1->x == j && player_1->y + 2 == i) std::cout << "\xDB";
-					else if(player_1->x == j && player_1->y + 3 == i) std::cout << "\xDB";
+					else if(player_1->x == j && player_1->y == i) cout << "\xDB";
+					else if(player_1->x == j && player_1->y + 1 == i) cout << "\xDB";
+					else if(player_1->x == j && player_1->y + 2 == i) cout << "\xDB";
+					else if(player_1->x == j && player_1->y + 3 == i) cout << "\xDB";
 					
 					// printing player_2 blade (length=4)
-					else if(player_2->x == j && player_2->y == i) std::cout << "\xDB";
-					else if(player_2->x == j && player_2->y + 1 == i) std::cout << "\xDB";
-					else if(player_2->x == j && player_2->y + 2 == i) std::cout << "\xDB";
-					else if(player_2->x == j && player_2->y + 3 == i) std::cout << "\xDB";
+					else if(player_2->x == j && player_2->y == i) cout << "\xDB";
+					else if(player_2->x == j && player_2->y + 1 == i) cout << "\xDB";
+					else if(player_2->x == j && player_2->y + 2 == i) cout << "\xDB";
+					else if(player_2->x == j && player_2->y + 3 == i) cout << "\xDB";
 					
 					
-					else std::cout << " "; // rest of the area is blank
+					else cout << " "; // rest of the area is blank
 					
-					if (j==width-1) std::cout << "\xB2"; // right wall element
+					if (j==width-1) cout << "\xB2"; // right wall element
 				} // end of inner for loop
 				
-				std::cout << "\xB2" << std::endl;
+				cout << "\xB2" << endl;
 			} // end of outer for loop
 			
 			// printing bottom wall
-			for (int i=0; i< width+2; i++) std::cout << "\xB2";
-			std::cout << std::endl;
+			for (int i=0; i< width+2; i++) cout << "\xB2";
+			cout << endl;
 			
 			// printing scores
-			std::cout << "Score 1: " << score_1 << "\t\t\tScore 2: " << score_2 << std::endl;
+			cout << "Score 1: " << score_1 << "\t\t\tScore 2: " << score_2 << endl;
 			
 		} // end of Draw function
 		
@@ -262,8 +264,9 @@ class Ping_Pong{
 };
 
 
+
 int main(){
-	Ping_Pong game(40, 20); // instansiating game
+	Ping_Pong game(40, 20); // instantiating the game
 	game.lets_ping_pong(); // playing
 	return 0; // leaving
 }
