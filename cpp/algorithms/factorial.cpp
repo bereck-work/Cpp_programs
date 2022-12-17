@@ -1,5 +1,5 @@
 #include <iostream>
-using std::cin, std::cout, std::endl;
+using std::cin, std::cout;
 
 int factorial(int n)
 // This function returns the nth factorial number using recursion.
@@ -9,10 +9,11 @@ int factorial(int n)
     return n * factorial(n - 1);
 }
 
-int main(){
+int main()
+{
     int n;
-    cout << "Enter a number for factorial: " << endl;
+    cout << "Enter a number for factorial: " << "\n";
     cin >> n;
-    cout << "Factorial of " << n << " is " << factorial(n) << endl;
+    cout << "Factorial of " << n << " is " << factorial(n) << "\n";
     return 0;
 }
