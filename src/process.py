@@ -1,6 +1,8 @@
 import os
 import pathlib
 import subprocess
+import sys
+
 from loguru import logger
 
 __all__ = ("Process",)
@@ -20,7 +22,6 @@ class Process:
             compiler_flags (str): The flags to use when compiling a cpp file.
             format_of_the_file (str): This parameter takes a list of file formats that the compiler will run.
         """
-        self.logger = logger
         self.compiler = compiler
         self.compiler_flags = compiler_flags
         self.format_of_the_file = format_of_the_file
@@ -37,11 +38,12 @@ class Process:
         )
         if process.returncode == 0:
             location = process.stdout
-            self.logger.info(f"Compiler {self.compiler} found at {location}")
+            logger.info(f"Compiler {self.compiler} found at {location}")
             return True
         else:
-            self.logger.error(
-                f"{self.compiler} does not exist on this system! Please install {self.compiler}."
+            logger.error(
+                f"{self.compiler} does not exist on this system! Please install {self.compiler} to compile files "
+                f"ending with {self.format_of_the_file}"
             )
             return False
 
@@ -66,8 +68,8 @@ class Process:
         ):
             return True
         else:
-            self.logger.error(
-                f"{filename} is not in the correct format!. {self.format_of_the_file} files are required."
+            logger.error(
+                f"{filename} provided does have the correct format. {self.format_of_the_file} files are required."
             )
             return False
 
@@ -83,26 +85,32 @@ class Process:
             len(cpp_source_file.name.split("/")) - 1
         ]
 
-        if self.check_if_compiler_exists() and self.check_file_format(cpp_source_file):
-            self.logger.info(
-                f"Compiling '{filename}' using '{self.compiler}' with flags '{self.compiler_flags}'"
+        if not self.check_if_compiler_exists():
+            logger.error(
+                f"{filename} has failed to compile! The compiler passed does not exist."
             )
-            cpp_command = f"{self.compiler} {cpp_source_file} {self.compiler_flags}"
+            sys.exit(1)
+        if not self.check_file_format(cpp_source_file):
+            logger.error(
+                f"{filename} has failed to compile! Either the file format is incorrect"
+            )
+            sys.exit(1)
 
-            process = subprocess.run(
-                cpp_command, shell=True, text=True, capture_output=True
-            )
-            if process.returncode == 0:
-                self.logger.info(
-                    f"{filename} compiled successfully!"
-                )  # If the file compiled successfully, run the executable.
-                os.system("./a.out && rm a.out")
-            else:
-                self.logger.error(
-                    f"{filename} failed to compile! Exception: {process.stderr}"
-                )
+        logger.info(
+            f"Compiling '{filename}' using '{self.compiler}' with flags '{self.compiler_flags}'"
+        )
+        cpp_command = f"{self.compiler} {cpp_source_file} {self.compiler_flags}"
+
+        process = subprocess.run(
+            cpp_command, shell=True, text=True, capture_output=True
+        )
+        if process.returncode == 0:
+            logger.info(
+                f"{filename} compiled successfully!"
+            )  # If the file compiled successfully, run the executable.
+            os.system("./a.out && rm a.out")
         else:
-            self.logger.error(
-                f"{filename} failed to compile! Either the compiler or the file format is incorrect."
+            logger.error(
+                f"{filename} failed to compile! Exception: {process.stderr}"
             )
-            return
+        return
