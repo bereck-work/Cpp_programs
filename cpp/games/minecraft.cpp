@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-
+using std::cin, std::cout, std::string;
 
 char block = char(219);
 char weakblock = char(176);
@@ -9,76 +9,76 @@ char gradientblock = char(177);
 char lineblock = char(178);
 char blade = char(205);
 char handle = char(206);
-std::string cEquip = "";
+string cEquip = "";
 
 char blocks[5] = {block, weakblock, gradientblock, lineblock};
 
 int blockcount[5] = {0, 0, 0, 0};
 
-std::string blocknames[5] = {"Stone", "Iron", "Copper", "Gold"};
+string blocknames[5] = {"Stone", "Iron", "Copper", "Gold"};
 
-std::string enemies[3] = {"Creeper", "Skeleton"};
+string enemies[3] = {"Creeper", "Skeleton"};
 
-int player(std::string equip = "Pickaxe")
+int player(string equip = "Pickaxe")
 {
 
-    std::string indent = " ";
+    string indent = " ";
 
     for (int i = 0; i < rand() % 50; i++)
     {
         indent += " ";
     }
 
-    std::cout << indent << "  " << blocks[0] << blocks[0] << std::endl
-         << indent << "  " << blocks[3] << blocks[3] << std::endl
+    cout << indent << "  " << blocks[0] << blocks[0] << "\n"
+         << indent << "  " << blocks[3] << blocks[3] << "\n"
          << indent
-         << blocks[0] << blocks[0] << blocks[0] << blocks[0] << std::endl
+         << blocks[0] << blocks[0] << blocks[0] << blocks[0] << "\n"
          << indent
-         << blocks[0] << blocks[2] << blocks[2] << blocks[0] << std::endl
+         << blocks[0] << blocks[2] << blocks[2] << blocks[0] << "\n"
          << indent << blocks[3] << blocks[2] << blocks[2] << blocks[3];
 
     if (equip == "Sword")
     {
-        std::cout << handle << blade << blade;
+        cout << handle << blade << blade;
     }
     else if (equip == "Pickaxe")
     {
-        std::cout << blade << blade << ")";
+        cout << blade << blade << ")";
     }
     else if (equip == "Gold Wand")
     {
-        std::cout << blade << blade << blade << "*";
+        cout << blade << blade << blade << "*";
     }
 
-    std::cout << std::endl
-         << indent << " " << blocks[2] << " " << blocks[2] << std::endl
+    cout << "\n"
+         << indent << " " << blocks[2] << " " << blocks[2] << "\n"
          << indent << " " << blocks[0] << " " << blocks[0];
 }
 
-int enemy(std::string eType = "Creeper", std::string weapon = "")
+int enemy(string eType = "Creeper", string weapon = "")
 {
 
     if (eType == "Creeper")
     {
-        std::cout << std::endl
-             << std::endl
-             << "A Creeper appeared!" << std::endl
-             << std::endl;
+        cout << "\n"
+             << "\n"
+             << "A Creeper appeared!" << "\n"
+             << "\n";
 
-        std::cout << " " << char(223) << std::endl
-             << char(221) << " " << char(221) << std::endl
-             << " " << char(223) << " " << std::endl
-             << " " << char(223) << std::endl
+        cout << " " << char(223) << "\n"
+             << char(221) << " " << char(221) << "\n"
+             << " " << char(223) << " " << "\n"
+             << " " << char(223) << "\n"
              << char(223) << char(223);
         if (weapon == "Gold Wand" || weapon == "Sword")
         {
-            std::cout << std::endl
+            cout << "\n"
                  << "You beat the Creeper and got gunpowder!";
         }
 
         else
         {
-            std::cout << std::endl
+            cout << "\n"
                  << "You were defeated by the Creeper!"
                  << " I guess a " << weapon << " isnt good enough!";
         }
@@ -86,25 +86,25 @@ int enemy(std::string eType = "Creeper", std::string weapon = "")
 
     if (eType == "Skeleton")
     {
-        std::cout << std::endl
-             << std::endl
-             << "A Skeleton appeared!" << std::endl
-             << std::endl;
+        cout << "\n"
+             << "\n"
+             << "A Skeleton appeared!" << "\n"
+             << "\n";
 
-        std::cout << "  " << char(219) << std::endl
-             << char(221) << char(223) << " " << char(221) << std::endl
-             << "  " << char(223) << "  " << std::endl
-             << "  " << char(223) << std::endl
-             << " " << char(221) << char(221) << std::endl;
+        cout << "  " << char(219) << "\n"
+             << char(221) << char(223) << " " << char(221) << "\n"
+             << "  " << char(223) << "  " << "\n"
+             << "  " << char(223) << "\n"
+             << " " << char(221) << char(221) << "\n";
         if (weapon == "Gold Wand")
         {
-            std::cout << std::endl
+            cout << "\n"
                  << "You beat the Skeleton and got a bone!";
         }
 
         else
         {
-            std::cout << std::endl
+            cout << "\n"
                  << "You were defeated by the Skeleton!"
                  << " I guess a " << weapon << " isnt good enough!";
         }
@@ -113,14 +113,14 @@ int enemy(std::string eType = "Creeper", std::string weapon = "")
 
 int createWorld(bool create = false)
 {
-    std::cout << std::endl;
+    cout << "\n";
     for (int i = i; i < 300; i++)
     {
         int a = rand() % 8;
 
         if (a > 4)
         {
-            std::cout << " ";
+            cout << " ";
             continue;
         }
         else if (a == 0)
@@ -140,7 +140,7 @@ int createWorld(bool create = false)
             blockcount[3]++;
         }
 
-        std::cout << blocks[a];
+        cout << blocks[a];
 
         if (blockcount[0] >= 20)
         {
@@ -159,93 +159,93 @@ int createWorld(bool create = false)
         }
     }
 
-    std::cout << std::endl;
+    cout << "\n";
 }
 
 int main()
 {
     srand(time(NULL));
 
-    std::cout << "MINECRAFT - SOLOLEARN EDITION" << std::endl
-         << std::endl;
+    cout << "MINECRAFT - Command line version" << "\n"
+         << "\n";
 
     int myplayer = player(cEquip);
     int world = createWorld(true);
 
-    std::cout << std::endl
-         << "In this world:" << std::endl;
+    cout << "\n"
+         << "In this world:" << "\n";
 
     for (int i = 0; i < 4; i++)
     {
-        std::cout << blockcount[i] << " " << blocknames[i] << " " << blocks[i] << std::endl;
+        cout << blockcount[i] << " " << blocknames[i] << " " << blocks[i] << "\n";
     }
 
-    std::cout << std::endl
-         << "Log: " << std::endl
-         << std::endl;
+    cout << "\n"
+         << "Log: " << "\n"
+         << "\n";
 
     if (blockcount[0] >= 20)
     {
-        std::cout << "You crafted a Stone Sword with " << 20 << " Stone!";
+        cout << "You crafted a Stone Sword with " << 20 << " Stone!";
         cEquip = "Sword";
     }
     else
     {
-        std::cout << "You dont have enough Stone in this world to craft a Stone Sword! You need 20.";
+        cout << "You dont have enough Stone in this world to craft a Stone Sword! You need 20.";
     }
 
-    std::cout << std::endl
-         << std::endl;
+    cout << "\n"
+         << "\n";
 
     if (blockcount[1] >= 30)
     {
-        std::cout << "You crafted a Iron Pickaxe with " << 30 << " Iron!";
+        cout << "You crafted a Iron Pickaxe with " << 30 << " Iron!";
         cEquip = "Pickaxe";
     }
     else
     {
-        std::cout << "You dont have enough Iron in this world to craft a Iron Pickaxe! You need 30.";
+        cout << "You dont have enough Iron in this world to craft a Iron Pickaxe! You need 30.";
     }
 
-    std::cout << std::endl
-         << std::endl;
+    cout << "\n"
+         << "\n";
 
     if (blockcount[2] >= 35)
     {
-        std::cout << "You crafted a Copper Sword with " << 35 << " Copper!";
+        cout << "You crafted a Copper Sword with " << 35 << " Copper!";
         cEquip = "Sword";
     }
     else
     {
-        std::cout << "You dont have enough Copper in this world to craft a Copper Sword! You need 35.";
+        cout << "You dont have enough Copper in this world to craft a Copper Sword! You need 35.";
     }
 
-    std::cout << std::endl
-         << std::endl;
+    cout << "\n"
+         << "\n";
 
     if (blockcount[3] >= 40)
     {
-        std::cout << "You crafted a Gold Wand with " << 40 << " Gold!";
+        cout << "You crafted a Gold Wand with " << 40 << " Gold!";
         cEquip = "Gold Wand";
     }
     else
     {
-        std::cout << "You dont have enough Gold in this world to craft a Gold Wand! You need 40.";
+        cout << "You dont have enough Gold in this world to craft a Gold Wand! You need 40.";
     }
 
-    std::cout << std::endl
-         << std::endl;
+    cout << "\n"
+         << "\n";
 
     int newPlyr = player(cEquip);
 
-    std::cout << std::endl
+    cout << "\n"
          << "Time to battle!";
 
     int creeper = enemy(enemies[(rand() % 2)], cEquip);
 
-    std::cout << std::endl
-         << "" << std::endl
-         << std::endl
+    cout << "\n"
+         << "" << "\n"
+         << "\n"
          << "Make sure to run again for another result!!!";
 
     return 0;
