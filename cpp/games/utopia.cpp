@@ -2,9 +2,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
-using std::srand, std::endl, std::cout, std::cin, std::string;
-
-
+using std::srand, std::cout, std::cin, std::string;
 
 auto score = new int();
 
@@ -19,8 +17,8 @@ public:
         string usingTemp;
         string tempHazard;
         float currentTemperature = (rand() % 100 - 30);
-        cout << endl
-             << "Current Temperature: " << currentTemperature << "C (Celsius)" << endl;
+        cout << "\n"
+             << "Current Temperature: " << currentTemperature << "C (Celsius)" << "\n";
         if (currentTemperature >= 10 && currentTemperature <= 25)
         {
             score += 500;
@@ -33,7 +31,7 @@ public:
         {
             score -= (rand() % 500);
         }
-        cout << "Points: " << score << endl;
+        cout << "Points: " << score << "\n";
     }
     void planetNameGen()
     {
@@ -78,11 +76,11 @@ public:
             cout << randomNumber << "%";
             score += (rand() % 201);
         }
-        cout << endl
+        cout << "\n"
              << "Points: " << score;
         float number = 100;
-        cout << endl
-             << endl
+        cout << "\n"
+             << "\n"
              << "Surface landmass: " << number - randomNumber << "% compared to water content.";
         if (number - randomNumber >= 40 && number - randomNumber <= 60)
         {
@@ -92,7 +90,7 @@ public:
         {
             score += (rand() % 201);
         }
-        cout << endl
+        cout << "\n"
              << "Points: " << score;
     }
     void beauty()
@@ -120,11 +118,11 @@ public:
             cout << "Very displeasing to the eye.";
             score -= (rand() % 250);
         }
-        cout << endl
+        cout << "\n"
              << "Points: " << score;
     }
     void moons()
-    {   
+    {
         srand((long)time(NULL));
         int randomNumber = (rand() % 11);
         cout << "Orbiting bodies: " << randomNumber;
@@ -136,14 +134,14 @@ public:
         cout << "Hawking Radiation (20 LY radius): ";
         if (randomNumber == 5)
         {
-            cout << "Detected! " << endl;
+            cout << "Detected! " << "\n";
             score -= 700 + (rand() % 500);
         }
         else
         {
-            cout << "Null" << endl;
+            cout << "Null" << "\n";
         }
-        cout << "Points: " << score << endl;
+        cout << "Points: " << score << "\n";
     }
     void planetVege()
     {
@@ -153,41 +151,41 @@ public:
         if (randomNumber == 1)
         {
             vegeType = " Planet is mainly covered in alien plants, some of which are edible.";
-            cout << "Planetary Vegetation: " << vegeType << endl;
+            cout << "Planetary Vegetation: " << vegeType << "\n";
             score += 350;
         }
         if (randomNumber == 2)
         {
             vegeType = " Planet is barren from any kind of vegetation, cultivation is likely near impossible.";
-            cout << "Planetary Vegetation: " << vegeType << endl;
+            cout << "Planetary Vegetation: " << vegeType << "\n";
             score -= 500;
         }
         if (randomNumber == 3)
         {
             vegeType = " Planet thrives in many kinds of vegetation, alien fruits and vegetables enable this planet to be a perfect candidate for humans.";
-            cout << "Planetary vegetation: " << vegeType << endl;
+            cout << "Planetary vegetation: " << vegeType << "\n";
             score += 1000;
         }
         if (randomNumber == 4)
         {
             vegeType = " Planet contains vegetation which is extremely toxic to humans.";
-            cout << "Planetary Vegetation: " << vegeType << endl;
+            cout << "Planetary Vegetation: " << vegeType << "\n";
             score -= 200;
         }
         if (randomNumber == 5)
         {
             vegeType = " Planet is barren of vegetation, but cultivation is possible.";
-            cout << "Planetary Vegetation: " << vegeType << endl;
+            cout << "Planetary Vegetation: " << vegeType << "\n";
             score += 250;
         }
         if (randomNumber == 6)
         {
             srand((long)time(NULL));
             vegeType = " Planet has strange growing vegetation that is unknown to human taxonomy.";
-            cout << "Planetary Vegetation: " << vegeType << endl;
+            cout << "Planetary Vegetation: " << vegeType << "\n";
             score += (rand() % 200);
         }
-        cout << "Points: " << score << endl;
+        cout << "Points: " << score << "\n";
     }
 
     void planetAtmos()
@@ -198,39 +196,39 @@ public:
         if (randomNumber == 1)
         {
             planetAtmosType = " Perfectly breathable to humans.";
-            cout << "Atmospheric Severity: " << planetAtmosType << endl;
+            cout << "Atmospheric Severity: " << planetAtmosType << "\n";
             srand((long)time(NULL));
             score += (rand() % 1000);
         }
         if (randomNumber == 2)
         {
             planetAtmosType = " Unbreathable to humans.";
-            cout << "Atmospheric Severity: " << planetAtmosType << endl;
+            cout << "Atmospheric Severity: " << planetAtmosType << "\n";
             srand((long)time(NULL));
             score -= (rand() % 1000);
         }
         if (randomNumber == 3)
         {
             planetAtmosType = " Slightly breathable to humans.";
-            cout << "Atmospheric Severity: " << planetAtmosType << endl;
+            cout << "Atmospheric Severity: " << planetAtmosType << "\n";
             srand((long)time(NULL));
             score += (rand() % 100);
         }
         if (randomNumber == 4)
         {
             planetAtmosType = " Moderatley breathable.";
-            cout << "Atmospheric Severity: " << planetAtmosType << endl;
+            cout << "Atmospheric Severity: " << planetAtmosType << "\n";
             srand((long)time(NULL));
             score += (rand() % 200);
         }
         if (randomNumber == 5)
         {
             planetAtmosType = "Barely breathable... Dangerous.";
-            cout << "Atmospheric Serverity: " << planetAtmosType << endl;
+            cout << "Atmospheric Serverity: " << planetAtmosType << "\n";
             srand((long)time(NULL));
             score -= (rand() % 500);
         }
-        cout << "Points: " << score << endl;
+        cout << "Points: " << score << "\n";
     }
     void habitatedByAliens()
     {
@@ -241,119 +239,119 @@ public:
             if (randomNumber == 1)
             {
                 string habitated = " An ancient alien civilization resides here, with a technological level that is extremely low. ";
-                cout << "Fauna: " << habitated << endl;
+                cout << "Fauna: " << habitated << "\n";
                 srand((long)time(NULL));
                 score += (rand() % 200);
             }
             if (randomNumber == 2 && randomNumber == (rand() % 2) + 1)
             {
                 string habitated = " This is a homeworld to a technologically advanced civilization. ";
-                cout << "Fauna: " << habitated << endl;
+                cout << "Fauna: " << habitated << "\n";
                 srand((long)time(NULL));
                 score -= (rand() % 200);
             }
             if (randomNumber == 3)
             {
                 string habitated = " Multiple different forms of bacteria and fungi exist here, we could learn from this.";
-                cout << "Fauna: " << habitated << endl;
+                cout << "Fauna: " << habitated << "\n";
                 srand((long)time(NULL));
                 score += (rand() % 300);
             }
             if (randomNumber == 4)
             {
                 string habitated = " Multiple different forms of walking, breathing and communicating species of alien animals live here, food source.";
-                cout << "Fauna: " << habitated << endl;
+                cout << "Fauna: " << habitated << "\n";
                 srand((long)time(NULL));
                 score += (rand() % 500);
             }
             if (randomNumber == 5)
             {
                 string habitated = " Unknown electromagnetic signal: ERROR*UNKNOWN*UNKNOWN*UNKNOWN*ERROR ";
-                cout << "Fauna: " << habitated << endl;
+                cout << "Fauna: " << habitated << "\n";
                 srand((long)time(NULL));
                 score -= (rand() % 500);
             }
         }
         else
         {
-            cout << "Fauna: Uninhabitated by any form of fauna." << endl;
+            cout << "Fauna: Uninhabitated by any form of fauna." << "\n";
         }
-        cout << "Points: " << score << endl;
+        cout << "Points: " << score << "\n";
     }
 };
 
 int main()
 {
-    cout << endl
-         << "Scanning for planets with suspected water content... " << endl
-         << endl;
+    cout << "\n"
+         << "Scanning for planets with suspected water content... " << "\n"
+         << "\n";
     char yn;
     cout << "A planet named: ";
     PlanetGeneration planetNameGenOBJ;
     planetNameGenOBJ.planetNameGen();
-    cout << endl;
+    cout << "\n";
     PlanetGeneration temperatureGenOBJ;
     temperatureGenOBJ.temperatureGen();
-    cout << endl;
+    cout << "\n";
     PlanetGeneration moonsOBJ;
     moonsOBJ.moons();
-    cout << endl
-         << endl;
+    cout << "\n"
+         << "\n";
     PlanetGeneration waterContentOBJ;
     waterContentOBJ.waterContent();
-    cout << endl
-         << endl;
+    cout << "\n"
+         << "\n";
     PlanetGeneration beautyOBJ;
     beautyOBJ.beauty();
-    cout << endl
-         << endl;
+    cout << "\n"
+         << "\n";
     PlanetGeneration planetVegeOBJ;
     planetVegeOBJ.planetVege();
-    cout << endl;
+    cout << "\n";
     PlanetGeneration planetAtmosOBJ;
     planetAtmosOBJ.planetAtmos();
-    cout << endl;
+    cout << "\n";
     PlanetGeneration planetHawkingOBJ;
     planetHawkingOBJ.hawking();
-    cout << endl;
+    cout << "\n";
     PlanetGeneration habitatedByAliensOBJ;
     habitatedByAliensOBJ.habitatedByAliens();
-    cout << endl;
-    if (score <= 500 && score >= -499)
+    cout << "\n";
+    if (*score <= 500 && *score >= -499)
     {
         cout << "Score: " << score << ","
              << " It is dangerous for humans on ";
         PlanetGeneration planetNameGenOBJ;
         planetNameGenOBJ.planetNameGen();
-        cout << "." << endl
-             << endl
-             << "deez nutz in yo mouth" << endl;
+        cout << "." << "\n"
+             << "\n"
+             << "deez nutz in yo mouth" << "\n";
     }
-    if (score <= -500)
+    if (*score <= -500)
     {
         cout << "Score: " << score << ","
              << " It is extremely dangerous for humans on ";
         PlanetGeneration planetNameGenOBJ;
         planetNameGenOBJ.planetNameGen();
-        cout << "." << endl
-             << endl
-             << "SUS" << endl;
+        cout << "." << "\n"
+             << "\n"
+             << "SUS" << "\n";
     }
-    if (score >= 1000)
+    if (*score >= 1000)
     {
         cout << "Score: " << score << ","
              << " Human life has the potential to thrive on ";
         PlanetGeneration planetNameGenOBJ;
         planetNameGenOBJ.planetNameGen();
-        cout << "!" << endl
-             << endl
-             << "big balls" << endl;
+        cout << "!" << "\n"
+             << "\n"
+             << "big balls" << "\n";
     }
     else
     {
-        cout << "Score: " << score << endl;
+        cout << "Score: " << score << "\n";
     }
-    cout << endl;
+    cout << "\n";
 
     cin.get();
     return 0;
