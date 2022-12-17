@@ -1,10 +1,9 @@
 import pathlib
 import sys
 import threading
-import typing
 from pathlib import Path
 
-import loguru
+from loguru import logger
 import questionary
 
 from .process import Process
@@ -15,7 +14,7 @@ __all__ = ("Interactive",)
 
 class Interactive:
     """
-    This class interace with the user and handles the input and output of the
+    This class interface with the user and handles the input and output of the
     program.
     """
 
@@ -30,7 +29,6 @@ class Interactive:
         self.compiler_flags = compiler_flags
         self.format_of_the_file = format_of_the_file
         self.cpp_source_directory = cpp_source_directory
-        self.logger = loguru.logger
         self.process = Process(
             self.compiler, self.compiler_flags, self.format_of_the_file
         )
@@ -51,7 +49,7 @@ class Interactive:
             f"{pathlib.Path(__file__).parent.parent}/{self.cpp_source_directory}"
         )
         if not directory.is_dir():
-            self.logger.error(f"Directory '{directory}' does not exist.")
+            logger.error(f"Directory '{directory}' does not exist.")
             sys.exit(1)
         list_of_filenames = []
         data_to_be_returned = {}
@@ -65,18 +63,18 @@ class Interactive:
                         list_of_filenames.append(sub_file.name)
                         data_to_be_returned[sub_file.name] = sub_file.absolute()
 
-        self.logger.info(
+        logger.info(
             f"Found '{len(list_of_filenames)}' in '{directory}' files with extension '{extension}'."
         )
         return data_to_be_returned
 
     @staticmethod
-    def ask_user_to_choose_file_to_compile(choices: typing.List[str]) -> str:
+    def ask_user_to_choose_file_to_compile(choices: list[str]) -> str:
         """
         This function asks the user to choose the file to compile.
 
         Parameters:
-            choices (list): List of choices.
+            choices (list[str]): List of choices.
 
         Returns:
             str: The choice of the user.
@@ -97,11 +95,11 @@ class Interactive:
             self.process.execute_cpp_file(files[choice])
 
         except Exception as e:
-            self.logger.error(f"Exception occurred: {e}")
+            logger.error(f"Exception occurred file executing {files[choice]} file.\n{e}")
             sys.exit(1)
 
         except KeyboardInterrupt:
-            self.logger.info("[*] Exiting...")
+            logger.info("[*] Aborted.")
             sys.exit(1)
         return
 
