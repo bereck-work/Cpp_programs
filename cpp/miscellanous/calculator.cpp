@@ -1,13 +1,13 @@
 #include <iostream>
 #include <stdio.h>
-#include <conio.h>
+#include <curses.h>
 #include <stdlib.h>
 using std::cout, std::cin;
 
 
-void main()
+int main()
 {
-    clrscr();
+    system("clear");
     int opr;
     int num1, num2, x;
     // display different operation of the calculator
