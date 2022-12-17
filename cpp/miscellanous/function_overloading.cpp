@@ -1,5 +1,5 @@
 #include <iostream>
-using std::cout, std::endl;
+using std::cout;
 
 // function with float type parameter
 float absolute(float var){
@@ -16,11 +16,11 @@ int absolute(int var) {
 }
 
 int main() {
-    
+
     // call function with int type parameter
-    cout << "Absolute value of -5 = " << absolute(-5) << endl;
+    cout << "Absolute value of -5 = " << absolute(-5) << "\n";
 
     // call function with float type parameter
-    cout << "Absolute value of 5.5 = " << absolute(5.5f) << endl;
+    cout << "Absolute value of 5.5 = " << absolute(5.5f) << "\n";
     return 0;
 }
